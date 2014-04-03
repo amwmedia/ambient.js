@@ -99,6 +99,8 @@ flexpoint.getPluginValue('scrollTop'); // 175
 
 ##Creating Plugins
 
-Full writing is coming soon... for now you can refer to template.js in the src/plugins folder for a starting point and description of all of the possible plugin functions. scrollTop.js in the same folder is a good example of a very basic plugin implementation.
+Full writup is coming soon... for now you can refer to template.js in the src/plugins folder for a starting point and description of all of the possible plugin functions. scrollTop.js in the same folder is a good example of a very basic plugin implementation.
+
 ---
+
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/40c470b679c786d2728cfe49642c0c03 "githalytics.com")](http://githalytics.com/amwmedia/flexpoint.js)
