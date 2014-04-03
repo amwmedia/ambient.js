@@ -34,17 +34,18 @@ Now all that is left is to apply styles to the page that take advantage of this 
 
 flexpoint has a JavaScript API which is used to configure flexpoint. It can also be used to hook into the flexpoint event bus.
 
-###`flexpoint.init(config);`
-- `config` => Object
+###`flexpoint.init(config[, delay]);`
+- `config`: Object
+- `delay`: Number
 
-The use of `init` was covered in `The Config Object` above.
+The use of `init` was covered in `The Config Object` above. The optional `delay` parameter can be used to tell flexpoint how frequently you'd like to allow flexpoint to do an update. If set to 0, flexpoint will still limit the updates to once per requestAnimationFrame. This prevents overloading the browser by executing more often that could possibly be necessary.
 
 ---
 
 ###`flexpoint.on(event, class, handler);`
-- `event` => String
-- `class` => String
-- `handler` => Function(event, class)
+- `event`: String
+- `class`: String
+- `handler`: Function(event, class)
 
 `on` is used to execute code when 1 of 3 events occur (enter, leave, update). `enter` is when a class goes from being inactive to active, `leave` is when a class goes from active to inactive, and `update` is every time flexpoint updates while the class is active. In the example below we execute `doSomething()` when the scroll-header class becomes active.
 
@@ -57,9 +58,9 @@ flexpoint.on('enter', 'scroll-header', doSomething);
 ---
 
 ###`flexpoint.off(event, class, handler);`
-- `event` => String
-- `class` => String
-- `handler` => Function(event, class)
+- `event`: String
+- `class`: String
+- `handler`: Function(event, class)
 
 `off` is the opposite of `on` and is used to unregister handlers from an event and class.
 
@@ -69,9 +70,9 @@ flexpoint.off('enter', 'scroll-header', doSomething);
 ---
 
 ###`flexpoint.isActive(class);`
-- `class` => String
+- `class`: String
 
-`returns` => boolean
+`returns`: boolean
 
 `isActive` is used to check whether a given class is currently active or not.
 
@@ -81,9 +82,9 @@ flexpoint.isActive('scroll-header'); // true
 ---
 
 ###`flexpoint.getPluginValue(pluginName);`
-- `pluginName` => String
+- `pluginName`: String
 
-`returns` => current value
+`returns`: current value
 
 `getPluginValue` can be used to retrieve the current value that a plugin is watching for changes. In the instance of `scrollTop` the value returned is the number of pixels that the user has scrolled down the page.
 
@@ -95,4 +96,4 @@ flexpoint.getPluginValue('scrollTop'); // 175
 
 ##Creating Plugins
 
-Coming soon...
+Full writing is coming soon... for now you can refer to template.js in the src/plugins folder for a starting point and description of all of the possible plugin functions. scrollTop.js in the same folder is a good example of a very basic plugin implementation.
