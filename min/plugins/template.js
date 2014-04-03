@@ -1,0 +1,1 @@
+!function(t,n){var e="myAwsomePlugin";t.flexpoint.prop[e]=n}(this,{getCurrentValue:function(){},getActiveClasses:function(){},watchEvent:""});
