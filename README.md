@@ -10,6 +10,9 @@ To start off, simply include flexpoint.js and the plugins that you'd like to use
 
 Flexpoint in and of itself doesn't provide any functionality. All the magic happens in the plugins. I've worked hard to make plugin creation as simple and straightforward as possible, please see the "Creating Plugins" section below for more info.
 
+###Examples
+- [Sticky Header (scrollTop)](http://codepen.io/amwmedia/pen/dikcr/)
+
 ---
 
 ##The Config Object
