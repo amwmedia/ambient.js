@@ -2,18 +2,18 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(function () {
-            return (root.flexpoint = factory());
+            return (root.ambient = factory());
         });
     } else if (typeof exports === 'object') {
         // Node.js
-        module.exports = root.flexpoint = factory();
+        module.exports = root.ambient = factory();
     } else {
         // Browser globals
-        root.flexpoint = factory();
+        root.ambient = factory();
     }
 }(this, function () {
     var timeout, config,
-        toDelay = 50,
+        toDelay = 0,
         initialized = false,
         props = {},
         allClasses = [],

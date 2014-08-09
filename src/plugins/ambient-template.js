@@ -9,7 +9,7 @@
     var name = 'myAwsomePlugin';
 //                                                     \\
 // =================================================== \\
-    root.flexpoint.prop[name] = plugin;
+    root.ambient.prop[name] = plugin;
 })(this,
 // =================== Plugin Code =================== \\
 //                                                     \\
@@ -31,7 +31,7 @@
     // ------------- getAllClasses -------------- \\
     // getAllClasses gets all possible classes
     // that this config could return. This lets
-    // flexpoint know if there are additional 
+    // ambient know if there are additional 
     // classes we are in charge of.
     // 
     // PARAMETERS:
