@@ -1,7 +1,7 @@
 (function (root, plugin) {
 // ================= Plugin Name ================= //
 //                                                 //
-    name = 'break';
+    name = 'width';
 //                                                 //
 // =============================================== //
     root.ambient.prop[name] = plugin;
