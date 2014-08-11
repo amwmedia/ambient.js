@@ -185,7 +185,7 @@
     // initializes confg and attaches to events
     // ---------------------------------- //
     function init(configure, delay) {
-        var cls, prop, propName, classes,
+        var cls, prop, propName, classes, wE, watchEvent,
             events = {};
 
         // only init once
@@ -219,21 +219,28 @@
                 classes = prop.getAllClasses ? prop.getAllClasses(cls, config[cls][propName]) : [cls];
                 allClasses = allClasses.concat(classes);
 
-                // initialize the plugin once only
-                if (!events[prop.watchEvent] || events[prop.watchEvent].indexOf(prop.watchElement) === -1) {
+                if (typeof prop.watchEvent === 'string') { prop.watchEvent = [prop.watchEvent]; }
 
-                    // setup the resize handlers
-                    if (prop.watchElement.addEventListener) {
-                        prop.watchElement.addEventListener(prop.watchEvent, debounceUpdate, false);
-                    } else {
-                        prop.watchElement.attachEvent('on' + prop.watchEvent, debounceUpdate);
+                wE = prop.watchEvent.length;
+                for (; wE-- ;) {
+                    watchEvent = prop.watchEvent[wE];
+                    // initialize the watchEvent once only
+                    if (!events[watchEvent] || events[watchEvent].indexOf(prop.watchElement) === -1) {
+
+                        // setup the resize handlers
+                        if (prop.watchElement.addEventListener) {
+                            prop.watchElement.addEventListener(watchEvent, debounceUpdate, false);
+                        } else {
+                            prop.watchElement.attachEvent('on' + watchEvent, debounceUpdate);
+                        }
+
+                        // Add this event to the list of hooks so it doesn't 
+                        // get added again by another property
+                        events[watchEvent] = events[watchEvent] || [];
+                        events[watchEvent].push(prop.watchElement);
                     }
-
-                    // Add this event to the list of hooks so it doesn't 
-                    // get added again by another property
-                    events[prop.watchEvent] = events[prop.watchEvent] || [];
-                    events[prop.watchEvent].push(prop.watchElement);
                 }
+                
             }
         }
 
