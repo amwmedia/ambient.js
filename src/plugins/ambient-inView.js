@@ -20,13 +20,14 @@
             e = d.documentElement,
 
             top = (w.pageYOffset != null) ? w.pageYOffset : (e.clientHeight && e || b).scrollTop,
-            width = w.innerWidth || b.clientWidth;
+            width = w.innerWidth || b.clientWidth,
+            height = Math.max(e.clientHeight, w.innerHeight || 0);
 
         // the location of the element could change if the
         // page width changes, so watch that too and include
         // it in the current value so it can be checked 
         // for changes
-        return top + '_' + width;
+        return top + '_' + width + '_' + height;
     },
 
     getAllClasses: function (className, props) {
@@ -37,12 +38,11 @@
         ];
     },
     
-    getActiveClasses: function (top_width, className, cfg) {
-        var w = window,
-            d = document,
-            e = d.documentElement,
-            h = Math.max(e.clientHeight, w.innerHeight || 0),
-            top = parseInt(top_width.split('_')[0], 10),
+    getActiveClasses: function (topWidthHeight, className, cfg) {
+        var d = document,
+            vals = topWidthHeight.split('_').map(function (v) {return parseInt(v, 10);}),
+            h = vals[2],
+            top = vals[0],
             bottom = top + h,
             obj = cfg.element = (typeof cfg.element === 'string') ? d.getElementById(cfg.element) : cfg.element,
             elTop = 0,

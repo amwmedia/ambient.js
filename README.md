@@ -2,18 +2,21 @@
 
 Ambient.js is designed to make it easier for you to make style changes based on ambient data in the page and browser.
 
-###What is Ambient Data?
+### What is Ambient Data?
 Ambient data relates to the state of your page and browser. Things like how far the user has scrolled down the page, what's currently visible on the screen, how wide the browser window is, etc. 
 
-###Getting Started
+### Getting Started
 To start off, simply include ambient.js and the plugins that you'd like to use in your page. Then make one call to ambient.init() and pass it the config object. The config object is explained in more detail below in the "JavaScript API" section.
 
 Ambient.js in and of itself doesn't provide any functionality. All the magic happens in the plugins. I've worked hard to make plugin creation as simple and straightforward as possible, please see the "Creating Plugins" section below for more info.
 
-###Examples
+### Plugins
+- [Width](https://github.com/amwmedia/ambient.js/blob/master/plugin-docs/ambient-width.md) ([dev](https://raw.githubusercontent.com/amwmedia/ambient.js/master/src/plugins/ambient-width.js), [min](https://raw.githubusercontent.com/amwmedia/ambient.js/master/src/plugins/ambient-width.min.js))
+
+### Examples
 - [Sticky Header (scrollTop)](http://codepen.io/amwmedia/pen/dikcr/)
 
-###Browser Compatibility
+### Browser Compatibility
 - Chrome
 - Firefox
 - IE 9+
