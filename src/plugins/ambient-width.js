@@ -1,24 +1,26 @@
-(function (root, plugin) {
+(((root, plugin) => {
 // ================= Plugin Name ================= //
 //                                                 //
     name = 'width';
 //                                                 //
 // =============================================== //
     root.ambient.prop[name] = plugin;
-})(this,
+}))(this,
 // ================= Plugin Code ================= //
 //                                                 //
 {
-    getCurrentValue: function () {
-        var w = window,
-            d = document,
-            b = d.body;
+    getCurrentValue() {
+        var w = window;
+        var d = document;
+        var b = d.body;
 
         return w.innerWidth || b.clientWidth;
     },
 
-    getAllClasses: function (className, props) {
-        var i, classes = [], max;
+    getAllClasses(className, props) {
+        var i;
+        var classes = [];
+        var max;
 
         props.min = props.min || 0;
         props.max = props.max || Infinity;
@@ -29,7 +31,7 @@
             className + '-gte',
             className + '-lte'
         ]);
-        
+
         if (props.bend) {
             max = (props.max === Infinity) ? 8192 : props.max;
             i = ~~((max-props.min) / props.bend);
@@ -40,13 +42,16 @@
         }
         return classes;
     },
-    getActiveClasses: function (winSize, className, props) {
-        var shiftEvery, i, aboveMin, belowMax,
-            classes = [];
+    getActiveClasses(winSize, className, props) {
+        var shiftEvery;
+        var i;
+        var aboveMin;
+        var belowMax;
+        var classes = [];
 
         aboveMin = winSize >= props.min;
         belowMax = winSize < props.max;
-        
+
         if (aboveMin && belowMax) {
             classes.push(className);
 

@@ -2,26 +2,25 @@
 // elements are within the viewport.
 
 
-(function (root, plugin) {
+(((root, plugin) => {
 // ================= Plugin Name ================= //
 //                                                 //
     var name = 'inView';
 //                                                 //
 // =============================================== //
     root.ambient.prop[name] = plugin;
-})(this,
+}))(this,
 // ================= Plugin Code ================= //
 //                                                 //
 {
-    getCurrentValue: function () {
-        var w = window,
-            d = document,
-            b = d.body,
-            e = d.documentElement,
-
-            top = (w.pageYOffset != null) ? w.pageYOffset : (e.clientHeight && e || b).scrollTop,
-            width = w.innerWidth || b.clientWidth,
-            height = Math.max(e.clientHeight, w.innerHeight || 0);
+    getCurrentValue() {
+        var w = window;
+        var d = document;
+        var b = d.body;
+        var e = d.documentElement;
+        var top = (w.pageYOffset != null) ? w.pageYOffset : (e.clientHeight && e || b).scrollTop;
+        var width = w.innerWidth || b.clientWidth;
+        var height = Math.max(e.clientHeight, w.innerHeight || 0);
 
         // the location of the element could change if the
         // page width changes, so watch that too and include
@@ -30,7 +29,7 @@
         return top + '_' + width + '_' + height;
     },
 
-    getAllClasses: function (className, props) {
+    getAllClasses(className, props) {
         return [
             className,
             className + '-above',
@@ -38,16 +37,16 @@
         ];
     },
     
-    getActiveClasses: function (topWidthHeight, className, cfg) {
-        var d = document,
-            vals = topWidthHeight.split('_').map(function (v) {return parseInt(v, 10);}),
-            h = vals[2],
-            top = vals[0],
-            bottom = top + h,
-            obj = cfg.element = (typeof cfg.element === 'string') ? d.getElementById(cfg.element) : cfg.element,
-            elTop = 0,
-            elBottom = 0,
-            classes = [];
+    getActiveClasses(topWidthHeight, className, cfg) {
+        var d = document;
+        var vals = topWidthHeight.split('_').map(v => parseInt(v, 10));
+        var h = vals[2];
+        var top = vals[0];
+        var bottom = top + h;
+        var obj = cfg.element = (typeof cfg.element === 'string') ? d.getElementById(cfg.element) : cfg.element;
+        var elTop = 0;
+        var elBottom = 0;
+        var classes = [];
 
         if (obj && obj.offsetParent) {
             do {

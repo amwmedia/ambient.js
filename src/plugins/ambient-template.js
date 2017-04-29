@@ -3,14 +3,14 @@
 // plugin tutorial and jsFiddle example code on GitHub
 
 
-(function (root, plugin) {
+(((root, plugin) => {
 // =================== Plugin Name =================== \\
 //                                                     \\
     var name = 'myAwsomePlugin';
 //                                                     \\
 // =================================================== \\
     root.ambient.prop[name] = plugin;
-})(this,
+}))(this,
 // =================== Plugin Code =================== \\
 //                                                     \\
 {
@@ -23,7 +23,7 @@
     // RETURNS: any value
     // 
     // -- REQUIRED
-    getCurrentValue: function () {
+    getCurrentValue() {
         
     },
 
@@ -58,7 +58,7 @@
     //      be on the body tag currently
     // 
     // -- REQUIRED
-    getActiveClasses: function (currentValue, className, configObject) {
+    getActiveClasses(currentValue, className, configObject) {
 
     },
 
