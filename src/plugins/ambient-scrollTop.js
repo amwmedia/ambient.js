@@ -7,26 +7,26 @@
 // the template.js plugin.
 
 
-(function (root, plugin) {
+(((root, plugin) => {
 // ================= Plugin Name ================= //
 //                                                 //
     var name = 'scrollTop';
 //                                                 //
 // =============================================== //
     root.ambient.prop[name] = plugin;
-})(this,
+}))(this,
 // ================= Plugin Code ================= //
 //                                                 //
 {
-    getCurrentValue: function () {
-        var w = window,
-            d = document,
-            b = d.body,
-            e = d.documentElement;
+    getCurrentValue() {
+        var w = window;
+        var d = document;
+        var b = d.body;
+        var e = d.documentElement;
 
         return (w.pageYOffset != null) ? w.pageYOffset : (e.clientHeight && e || b).scrollTop;
     },
-    getActiveClasses: function (top, className, cfg) {
+    getActiveClasses(top, className, cfg) {
         cfg.min = cfg.min || 0;
         cfg.max = cfg.max || Infinity;
         return (top >= cfg.min && top < cfg.max) ? [className] : [];

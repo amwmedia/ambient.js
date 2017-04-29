@@ -1,9 +1,7 @@
-(function (root, factory) {
+(((root, factory) => {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(function () {
-            return (root.ambient = factory());
-        });
+        define(() => root.ambient = factory());
     } else if (typeof exports === 'object') {
         // Node.js
         module.exports = root.ambient = factory();
@@ -11,31 +9,36 @@
         // Browser globals
         root.ambient = factory();
     }
-}(this, function () {
-    var timeout, config,
-        toDelay = 0,
-        initialized = false,
-        props = {},
-        allClasses = [],
-        activeClasses = [],
-        currentClasses = [],
-        handlers = {},
-        w = window,
-        d = document,
-        b = d.body,
-        rAF = window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-            };
+})(this, () => {
+    var timeout;
+    var config;
+    var toDelay = 0;
+    var initialized = false;
+    var props = {};
+    var allClasses = [];
+    var activeClasses = [];
+    var currentClasses = [];
+    var handlers = {};
+    var w = window;
+    var d = document;
+    var b = d.body;
+
+    var rAF = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        (callback => {
+            window.setTimeout(callback, 1000 / 60);
+        });
 
     function rafDoUpdate() { rAF(doUpdate); }
     // executed on every resize event (debounced to 100ms)
     function doUpdate () {
-        var cls, propName, prop,
-            propVals = {},
-            classes, propClasses;
+        var cls;
+        var propName;
+        var prop;
+        var propVals = {};
+        var classes;
+        var propClasses;
 
         activeClasses = [];
 
@@ -105,9 +108,7 @@
         }
 
         // de-duplicate classes
-        activeClasses = activeClasses.filter(function (val, idx, arr) {
-            return arr.indexOf(val) === idx;
-        });
+        activeClasses = activeClasses.filter((val, idx, arr) => arr.indexOf(val) === idx);
 
         // push the changes to the page
         updateBodyClasses();
@@ -117,14 +118,13 @@
     }
 
     function updateBodyClasses() {
-        var i, cls,
-        bodyClasses = b.className;
+        var i;
+        var cls;
+        var bodyClasses = b.className;
 
         // update currentClasses with active body classes
-        currentClasses = bodyClasses.split(' ').filter(function (val, idx) {
-            // filter out anything we're not in charge of
-            return allClasses.indexOf(val) !== -1;
-        });
+        currentClasses = bodyClasses.split(' ').filter((val, idx) => // filter out anything we're not in charge of
+        allClasses.indexOf(val) !== -1);
 
         // search for classes that are not currently active,
         // but should be, and add them
@@ -163,7 +163,7 @@
         }
 
         // push the new classes to body... and filter out extra spaces
-        b.className = bodyClasses.split(' ').filter(function(e){return e;}).join(' ');
+        b.className = bodyClasses.split(' ').filter(e => e).join(' ');
     }
 
     // resize debouncing, will execute resize code no more
@@ -181,12 +181,17 @@
             }
         }
     }
-    
+
     // initializes confg and attaches to events
     // ---------------------------------- //
     function init(configure, delay) {
-        var cls, prop, propName, classes, wE, watchEvent,
-            events = {};
+        var cls;
+        var prop;
+        var propName;
+        var classes;
+        var wE;
+        var watchEvent;
+        var events = {};
 
         // only init once
         if (initialized) { return; }
@@ -247,7 +252,7 @@
         if (typeof delay === 'number') { toDelay = delay; }
 
         initialized = true;
-        
+
         // do the initial resize logic to kick things off
         doUpdate();
     }
@@ -257,8 +262,9 @@
     // ================================== //
 
     function on(action, cls, handler) {
-        var actionArr = action.split(' '),
-            i, a;
+        var actionArr = action.split(' ');
+        var i;
+        var a;
         handlers[cls] = handlers[cls] || {};
 
         i = actionArr.length;
@@ -270,8 +276,10 @@
     }
 
     function off(action, cls, handler) {
-        var actionArr = action.split(' '),
-            i, j, a;
+        var actionArr = action.split(' ');
+        var i;
+        var j;
+        var a;
 
         j = actionArr.length;
         for (; j-- ;) {
@@ -288,10 +296,11 @@
     }
 
     function fire(action, cls) {
-        var len, i = 0;
+        var len;
+        var i = 0;
 
         if (!config[cls].updated) { return; }
-        
+
         if (handlers[cls] && handlers[cls][action] && handlers[cls][action].length) {
             for (len = handlers[cls][action].length; i < len; i++) {
                 handlers[cls][action][i](action, cls);
@@ -313,9 +322,9 @@
     }
 
     return {
-        init: init,
-        on: on,
-        off: off,
+        init,
+        on,
+        off,
         prop: props,
         getPluginValue: getPropValue,
         isActive: styleIsActive
